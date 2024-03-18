@@ -74,6 +74,29 @@ public class LayerManager : MonoBehaviour
             {
                 Layers[i].SetActive(true);
             }
+
+            for (int i = 0; i < Layers.Length; i++)
+            {
+                for(int t = 0; i < Layers[i].transform.childCount; t++)
+                {
+                    if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
+                    {
+                        longBrickAmmount++;
+                    }
+                    else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("SmallBrick"))
+                    {
+                        smallBrickAmmount++;
+                    }
+                    else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("SlopedBrick"))
+                    {
+                        slopedBrickAmmount++;
+                    }
+                    else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("Roof"))
+                    {
+                        roofAmmount++;
+                    }
+                }
+            }
         }
     }
 }
