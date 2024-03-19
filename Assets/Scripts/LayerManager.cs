@@ -18,6 +18,37 @@ public class LayerManager : MonoBehaviour
     int slopedBrickAmmount;
     int roofAmmount;
 
+    private void Start()
+    {
+        for (int i = 0; i < Layers.Length; i++)
+        {
+            Debug.Log(i);
+            for (int t = 0; t < Layers[i].transform.childCount; t++)
+            {
+                if (Layers[i].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
+                {
+                    longBrickAmmount++;
+                }
+                else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("SmallBrick"))
+                {
+                    smallBrickAmmount++;
+                }
+                else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("SlopedBrick"))
+                {
+                    slopedBrickAmmount++;
+                }
+                else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("Roof"))
+                {
+                    roofAmmount++;
+                }
+            }
+        }
+        Debug.Log("Longbricks: " + longBrickAmmount);
+        longBrickCount.text = "Long Bricks: " + longBrickAmmount.ToString();
+        smallBrickCount.text = "Small Bricks: " + smallBrickAmmount.ToString();
+        slopedBrickCount.text = "Sloped Bricks: " + slopedBrickAmmount.ToString();
+        roofCount.text = "Roofs: " + roofAmmount.ToString();
+    }
     public void NextLayer()
     {
         longBrickAmmount = 0;
@@ -77,26 +108,31 @@ public class LayerManager : MonoBehaviour
 
             for (int i = 0; i < Layers.Length; i++)
             {
-                for(int t = 0; i < Layers[i].transform.childCount; t++)
+                for(int t = 0; t < Layers[i].transform.childCount; t++)
                 {
-                    if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
+                    if (Layers[i].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
                     {
                         longBrickAmmount++;
                     }
-                    else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("SmallBrick"))
+                    else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("SmallBrick"))
                     {
                         smallBrickAmmount++;
                     }
-                    else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("SlopedBrick"))
+                    else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("SlopedBrick"))
                     {
                         slopedBrickAmmount++;
                     }
-                    else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("Roof"))
+                    else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("Roof"))
                     {
                         roofAmmount++;
                     }
                 }
             }
+
+            longBrickCount.text = "Long Bricks: " + longBrickAmmount.ToString();
+            smallBrickCount.text = "Small Bricks: " + smallBrickAmmount.ToString();
+            slopedBrickCount.text = "Sloped Bricks: " + slopedBrickAmmount.ToString();
+            roofCount.text = "Roofs: " + roofAmmount.ToString();
         }
     }
 }
