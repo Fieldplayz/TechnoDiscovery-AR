@@ -20,9 +20,61 @@ public class LayerManager : MonoBehaviour
 
     private void Start()
     {
+        CountTotalBricks();
+    }
+
+    public void NextLayer()
+    {
+        longBrickAmmount = 0;
+        smallBrickAmmount = 0;
+        slopedBrickAmmount = 0;
+        roofAmmount = 0;
+
+        if (currentLayer < Layers.Length)
+        {
+            currentLayer++;
+
+            if(currentLayer == 1)
+            {
+                for (int i = 0; i <= Layers.Length; i++)
+                {
+                    if (Layers[i] != Layers[currentLayer])
+                    {
+                        Layers[i].SetActive(false);
+                    }
+                    else
+                    {
+                        Layers[i].SetActive(true);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < currentLayer; i++)
+                {
+                    Layers[i].SetActive(true);
+                }
+            }
+
+            CountLayerBricks();
+        }
+        else if(currentLayer == Layers.Length)
+        {
+            currentLayer = 0;
+
+            for (int i = 0; i < Layers.Length; i++)
+            {
+                Layers[i].SetActive(true);
+            }
+
+            CountTotalBricks();
+        }
+    }
+
+    public void CountTotalBricks()
+    {
         for (int i = 0; i < Layers.Length; i++)
         {
-            Debug.Log(i);
             for (int t = 0; t < Layers[i].transform.childCount; t++)
             {
                 if (Layers[i].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
@@ -43,96 +95,39 @@ public class LayerManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Longbricks: " + longBrickAmmount);
+
         longBrickCount.text = "Long Bricks: " + longBrickAmmount.ToString();
         smallBrickCount.text = "Small Bricks: " + smallBrickAmmount.ToString();
         slopedBrickCount.text = "Sloped Bricks: " + slopedBrickAmmount.ToString();
         roofCount.text = "Roofs: " + roofAmmount.ToString();
     }
-    public void NextLayer()
+
+    private void CountLayerBricks()
     {
-        longBrickAmmount = 0;
-        smallBrickAmmount = 0;
-        slopedBrickAmmount = 0;
-        roofAmmount = 0;
-
-        if (currentLayer < Layers.Length)
-        {
-            currentLayer++;
-
-            for (int i = 0; i < Layers.Length; i++)
+            for (int t = 0; t < Layers[currentLayer].transform.childCount; t++)
             {
-                if (Layers[i] != Layers[currentLayer])
-                {
-                    Layers[i].SetActive(false);
-                }
-                else
-                {
-                    Layers[i].SetActive(true);
-                }
-            }
-
-            for (int i = 0; i < Layers[currentLayer].transform.childCount; i++)
-            {
-                if (Layers[currentLayer].transform.GetChild(i).gameObject.CompareTag("LongBrick"))
+                if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
                 {
                     longBrickAmmount++;
                 }
-                else if (Layers[currentLayer].transform.GetChild(i).gameObject.CompareTag("SmallBrick"))
+                else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("SmallBrick"))
                 {
                     smallBrickAmmount++;
                 }
-                else if (Layers[currentLayer].transform.GetChild(i).gameObject.CompareTag("SlopedBrick"))
+                else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("SlopedBrick"))
                 {
                     slopedBrickAmmount++;
                 }
-                else if (Layers[currentLayer].transform.GetChild(i).gameObject.CompareTag("Roof"))
+                else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("Roof"))
                 {
                     roofAmmount++;
                 }
-            }
-
-            longBrickCount.text = "Long Bricks: " + longBrickAmmount.ToString();
-            smallBrickCount.text = "Small Bricks: " + smallBrickAmmount.ToString();
-            slopedBrickCount.text = "Sloped Bricks: " + slopedBrickAmmount.ToString();
-            roofCount.text = "Roofs: " + roofAmmount.ToString();
         }
-        else if(currentLayer == Layers.Length)
-        {
-            currentLayer = 0;
 
-            for (int i = 0; i < Layers.Length; i++)
-            {
-                Layers[i].SetActive(true);
-            }
-
-            for (int i = 0; i < Layers.Length; i++)
-            {
-                for(int t = 0; t < Layers[i].transform.childCount; t++)
-                {
-                    if (Layers[i].transform.GetChild(t).gameObject.CompareTag("LongBrick"))
-                    {
-                        longBrickAmmount++;
-                    }
-                    else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("SmallBrick"))
-                    {
-                        smallBrickAmmount++;
-                    }
-                    else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("SlopedBrick"))
-                    {
-                        slopedBrickAmmount++;
-                    }
-                    else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("Roof"))
-                    {
-                        roofAmmount++;
-                    }
-                }
-            }
-
-            longBrickCount.text = "Long Bricks: " + longBrickAmmount.ToString();
-            smallBrickCount.text = "Small Bricks: " + smallBrickAmmount.ToString();
-            slopedBrickCount.text = "Sloped Bricks: " + slopedBrickAmmount.ToString();
-            roofCount.text = "Roofs: " + roofAmmount.ToString();
-        }
+        longBrickCount.text = "Long Bricks: " + longBrickAmmount.ToString();
+        smallBrickCount.text = "Small Bricks: " + smallBrickAmmount.ToString();
+        slopedBrickCount.text = "Sloped Bricks: " + slopedBrickAmmount.ToString();
+        roofCount.text = "Roofs: " + roofAmmount.ToString();
     }
+
 }
