@@ -10,6 +10,7 @@ public class LayerManager : MonoBehaviour
     [SerializeField] TMP_Text smallBrickCount;
     [SerializeField] TMP_Text slopedBrickCount;
     [SerializeField] TMP_Text roofCount;
+    [SerializeField] TMP_Text layerCount;
 
     int currentLayer;
 
@@ -33,8 +34,12 @@ public class LayerManager : MonoBehaviour
         if (currentLayer < Layers.Length)
         {
             currentLayer++;
+            
+            layerCount.text = "Layer " + currentLayer.ToString();
+            Debug.Log(currentLayer);
+            
 
-            if(currentLayer == 1)
+            if (currentLayer <= 1)
             {
                 for (int i = 0; i <= Layers.Length; i++)
                 {
@@ -47,10 +52,11 @@ public class LayerManager : MonoBehaviour
                         Layers[i].SetActive(true);
                     }
                 }
+                
             }
             else
             {
-                for (int i = 0; i < currentLayer; i++)
+                for (int i = 0; i <= currentLayer; i++)
                 {
                     Layers[i].SetActive(true);
                 }
