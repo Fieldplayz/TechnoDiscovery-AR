@@ -8,6 +8,8 @@ TagManager:
   - SmallBrick
   - SlopedBrick
   - Roof
+  - Door
+  - Window
   layers:
   - Default
   - TransparentFX

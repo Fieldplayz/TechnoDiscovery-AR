@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5836413725382982714}
   m_Layer: 0
   m_Name: raam
-  m_TagString: Untagged
+  m_TagString: Window
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

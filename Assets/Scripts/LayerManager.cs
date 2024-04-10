@@ -10,6 +10,8 @@ public class LayerManager : MonoBehaviour
     [SerializeField] TMP_Text smallBrickCount;
     [SerializeField] TMP_Text slopedBrickCount;
     [SerializeField] TMP_Text roofCount;
+    [SerializeField] TMP_Text doorCount;
+    [SerializeField] TMP_Text windowCount;
     [SerializeField] TMP_Text layerCount;
 
     int currentLayer;
@@ -18,6 +20,8 @@ public class LayerManager : MonoBehaviour
     int smallBrickAmmount;
     int slopedBrickAmmount;
     int roofAmmount;
+    int doorAmmount;
+    int windowAmmount;
 
     private void Start()
     {
@@ -99,6 +103,14 @@ public class LayerManager : MonoBehaviour
                 {
                     roofAmmount++;
                 }
+                else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("Door"))
+                {
+                    doorAmmount++;
+                }
+                else if (Layers[i].transform.GetChild(t).gameObject.CompareTag("Window"))
+                {
+                    windowAmmount++;
+                }
             }
         }
 
@@ -127,6 +139,14 @@ public class LayerManager : MonoBehaviour
                 else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("Roof"))
                 {
                     roofAmmount++;
+                }
+                else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("Door"))
+                {
+                    doorAmmount++;
+                }
+                else if (Layers[currentLayer].transform.GetChild(t).gameObject.CompareTag("Window"))
+                {
+                    windowAmmount++;
                 }
         }
 

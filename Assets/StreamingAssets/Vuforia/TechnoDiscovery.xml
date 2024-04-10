@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig>
   <Tracking>
+    <ImageTarget name="ar_marker2" size="5.000000 5.000000" />
+    <ImageTarget name="ar_marker1" size="5.000000 5.000000" />
+    <ImageTarget name="ar_marker" size="5.000000 5.000000" />
     <ImageTarget name="Mousemat" size="5.000000 7.279215" />
+    <ImageTarget name="Techno_Discovery_mat" size="5.000000 7.580121" />
   </Tracking>
 </QCARConfig>
