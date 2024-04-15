@@ -34,6 +34,8 @@ public class LayerManager : MonoBehaviour
         smallBrickAmmount = 0;
         slopedBrickAmmount = 0;
         roofAmmount = 0;
+        windowAmmount = 0;
+        doorAmmount = 0;
 
         if (currentLayer < Layers.Length)
         {
@@ -81,6 +83,60 @@ public class LayerManager : MonoBehaviour
         }
     }
 
+    public void PreviousLayer()
+    {
+        longBrickAmmount = 0;
+        smallBrickAmmount = 0;
+        slopedBrickAmmount = 0;
+        roofAmmount = 0;
+        windowAmmount = 0;
+        doorAmmount = 0;
+
+        if (currentLayer > 0)
+        {
+            currentLayer--;
+
+            layerCount.text = "Layer " + currentLayer.ToString();
+            Debug.Log(currentLayer);
+
+
+            if (currentLayer <= 1)
+            {
+                for (int i = 0; i <= Layers.Length; i++)
+                {
+                    if (Layers[i] != Layers[currentLayer])
+                    {
+                        Layers[i].SetActive(false);
+                    }
+                    else
+                    {
+                        Layers[i].SetActive(true);
+                    }
+                }
+
+            }
+            else
+            {
+                for (int i = 0; i <= currentLayer; i++)
+                {
+                    Layers[i].SetActive(true);
+                }
+            }
+
+            CountLayerBricks();
+        }
+        else if (currentLayer == 0)
+        {
+            currentLayer = Layers.Length;
+
+            for (int i = 0; i < Layers.Length; i++)
+            {
+                Layers[i].SetActive(true);
+            }
+
+            CountTotalBricks();
+        }
+    }
     public void CountTotalBricks()
     {
         for (int i = 0; i < Layers.Length; i++)
