@@ -41,118 +41,59 @@ public class LayerManager : MonoBehaviour
     }
 
     public void NextLayer()
-    {
-        longBrickAmmount = 0;
-        smallBrickAmmount = 0;
-        slopedBrickAmmount = 0;
-        roofAmmount = 0;
-        windowAmmount = 0;
-        doorAmmount = 0;
-        
-        //checks if the currentlyayer isn't higher than the layers length
-        if (currentLayer < Layers.Length)
-        {
-            currentLayer++;
-            
-            layerCount.text = "Laag " + currentLayer.ToString();
-            Debug.Log(currentLayer);
-            
+	{
+		//if there are still more layers left
+		if (currentLayer < Layers.Length)
+		{
+			currentLayer++;
+			
+			UpdateLayerActivity();
+		}
+	}
 
-            if (currentLayer >= 1)
-            {
-                for (int i = 0; i <= Layers.Length; i++)
-                {
-                    Debug.Log(i);
-                    Debug.Log("Currentlayer: " + currentLayer);
-
-                    if (i == currentLayer)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Layers[i].SetActive(true);
-                    }
-                }
-                
-            }
-            else
-            {
-                for (int i = 0; i <= currentLayer; i++)
-                {
-                    Layers[i].SetActive(true);
-                }
-            }
-
-            CountTotalBricks();
-        }
-        else if(currentLayer == Layers.Length)
-        {
-            currentLayer = 0;
-
-            for (int i = 0; i < Layers.Length; i++)
-            {
-                Layers[i].SetActive(true);
-            }
-
-            CountTotalBricks();
-        }
-    }
-
-    public void PreviousLayer()
-    {
-        longBrickAmmount = 0;
-        smallBrickAmmount = 0;
-        slopedBrickAmmount = 0;
-        roofAmmount = 0;
-        windowAmmount = 0;
-        doorAmmount = 0;
-
-        if (currentLayer > 0)
-        {
-            currentLayer--;
-
-            layerCount.text = "Layer " + currentLayer.ToString();
-            Debug.Log(currentLayer);
-
-
-            if (currentLayer <= 1)
-            {
-                for (int i = 0; i <= Layers.Length; i++)
-                {
-                    if (Layers[i] != Layers[currentLayer])
-                    {
-                        Layers[i].SetActive(false);
-                    }
-                    else
-                    {
-                        Layers[i].SetActive(true);
-                    }
-                }
-
-            }
-            else
-            {
-                for (int i = 0; i <= currentLayer; i++)
-                {
-                    Layers[i].SetActive(true);
-                }
-            }
-
-            CountTotalBricks();
-        }
-        else if (currentLayer == 0)
-        {
-            currentLayer = Layers.Length;
-
-            for (int i = 0; i < Layers.Length; i++)
-            {
-                Layers[i].SetActive(true);
-            }
-
-            CountTotalBricks();
-        }
-    }
+	public void PreviousLayer()
+	{
+		//if there are still more layers left to go back
+		if (currentLayer > 0)
+		{
+			currentLayer--;
+			
+			UpdateLayerActivity();
+		}
+	}
+	
+	private void UpdateLayerActivity()
+	{
+		//reset counting varibles
+		longBrickAmmount = 0;
+		smallBrickAmmount = 0;
+		slopedBrickAmmount = 0;
+		roofAmmount = 0;
+		windowAmmount = 0;
+		doorAmmount = 0;
+		
+		layerCount.text = "Laag " + currentLayer.ToString();
+		Debug.Log(currentLayer);
+		
+		//loop trough all layers
+		for (int i = 0; i < Layers.Length; i++)
+		{
+			var layer = Layers[i];
+			bool needsToBeActive = (i <= currentLayer);
+			
+			//if we are on the first layer we show the entire building
+			if (currentLayer == 0) 
+			{
+				layer.SetActive(true);
+			}
+			else
+			{		
+				layer.SetActive(needsToBeActive);
+			}
+		}
+		
+		CountTotalBricks();
+	}
     public void CountTotalBricks()
     {
         for (int i = 0; i < Layers.Length; i++)
