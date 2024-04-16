@@ -46,7 +46,7 @@ public class LayerManager : MonoBehaviour
 		if (currentLayer < Layers.Length)
 		{
 			currentLayer++;
-			
+
 			UpdateLayerActivity();
 		}
 	}
@@ -57,7 +57,8 @@ public class LayerManager : MonoBehaviour
 		if (currentLayer > 0)
 		{
 			currentLayer--;
-			
+
+            CountLayerBricks(currentLayer);
 			UpdateLayerActivity();
 		}
 	}
@@ -92,7 +93,7 @@ public class LayerManager : MonoBehaviour
 			}
 		}
 		
-		CountTotalBricks();
+		CountLayerBricks(currentLayer);
 	}
     public void CountTotalBricks()
     {

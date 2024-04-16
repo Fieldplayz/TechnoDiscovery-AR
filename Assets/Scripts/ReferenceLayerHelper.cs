@@ -17,4 +17,14 @@ public class ReferenceLayerHelper : MonoBehaviour
             activeManager.NextLayer();
         }
     }
+
+   public void PreviousLayer()
+    {
+        var activeManager = layerManagers.FirstOrDefault(lm => lm.isActiveAndEnabled);
+        if (activeManager != null)
+        {
+            Debug.Log(activeManager.name);
+            activeManager.PreviousLayer();
+        }
+    }
 }

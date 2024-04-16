@@ -1,3 +1,4 @@
+using EasyTransition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public TransitionSettings sceneTransition;
+    public TransitionSettings startTransition;
+    public float loadDelay;
+
+    private void Start()
+    {
+        TransitionManager.Instance().Transition(startTransition, 0);
+    }
+
     public void ToMainScene()
     {
-        SceneManager.LoadScene(1);
+        Debug.Log("ToMainScene");
+        TransitionManager.Instance().Transition("MainScene", sceneTransition, loadDelay);
     }
 
     public void ClearPrefs()
